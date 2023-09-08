@@ -12,10 +12,8 @@ var elementoDiv='';
 //METODOS
 const cambiaBackGround = function (elemento, color, tipo = 'click'){
                             if(tipo==='click'){
-                                if(elemento.style.backgroundColor === color || elemento.style.backgroundColor==='')
-                                    elemento.style.backgroundColor = 'black';
-                                else
-                                    elemento.style.backgroundColor = color;
+                                (elemento.style.backgroundColor === color || elemento.style.backgroundColor === '') ? elemento.style.backgroundColor = 'black' :
+                                                                                                                      elemento.style.backgroundColor = color;
                             }
                             else if(tipo === 'letra'){
                                 elemento.style.backgroundColor = color;
