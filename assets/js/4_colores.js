@@ -23,23 +23,12 @@ const cambiaBackGround = function (elemento, color, tipo = 'click'){
                         }
 
 //CAMBIA EL COLOR CUANDO HACEN CLICK EN LOS DIV
-div1.addEventListener("click", function(){
-                                    cambiaBackGround(div1,'blue');
-                                }
-);                        
-div2.addEventListener("click", function(){
-                                    cambiaBackGround(div2,'red');
-                                }
-);                        
-div3.addEventListener("click", function(){
-                                    cambiaBackGround(div3,'green');
-                                }
-);
-div4.addEventListener("click", function(){
-                                    cambiaBackGround(div4,'yellow');
-                                }
-);     
+div1.addEventListener("click", function(){cambiaBackGround(div1,'blue');});                        
+div2.addEventListener("click", function(){cambiaBackGround(div2,'red');});                        
+div3.addEventListener("click", function(){cambiaBackGround(div3,'green');});
+div4.addEventListener("click", function(){cambiaBackGround(div4,'yellow');});     
 
+//CREA EL DIV DE LAS LETRAS Q W E
 function creaDiv(letraPulsada){
     if(document.getElementById("key1")===null){
         const newDiv = document.createElement('div');
@@ -48,51 +37,44 @@ function creaDiv(letraPulsada){
         newDiv.id = 'key1';
         newDiv.style.border ='1px solid black';
         newDiv.innerText='Presione las teclas "q", "w" o "e" para que este contenedor cambie de color';
-        (letraPulsada==='q' || letraPulsada==='e') ? newDiv.style.color = 'white' :  newDiv.style.color = 'black';
         sectionLetras.appendChild(newDiv);
-        elementoDiv=newDiv;
-    }
-    else{
-        elementoDiv=document.getElementById("key1");
-        (letraPulsada==='q' || letraPulsada==='e') ? elementoDiv.style.color = 'white' : elementoDiv.style.color = 'black';
     }
     
+    elementoDiv=document.getElementById("key1");
+    (letraPulsada==='q' || letraPulsada==='e') ? elementoDiv.style.color = 'white' : elementoDiv.style.color = 'black';
+
+}
+
+//retorna el color asignado a la letra pulsada
+const asignaColor = function (letra){
+    switch (letra){
+        case "a": return 'pink';
+        case "s": return 'orange';
+        case "d": return 'lightblue';
+        case "q": return 'purple';
+        case "w": return 'gray';
+        case "e": return 'brown';
+        default:
+            elementoDiv.style.color = 'black';
+            return 'white';
+    }
 }
 
 //CAMBIA EL COLOR CUANDO PRESIONAN UNA TECLA
 document.addEventListener('keydown', function (event) {
     let letraPulsada = event.key.toLocaleLowerCase();
-    if (letraPulsada === 'a') {
-        colorFondo = 'pink';
-        elementoDiv = div5;
-    } else if (letraPulsada === 's') {
-        colorFondo = 'orange';
-        elementoDiv = div5;
+    switch (letraPulsada){
+        case "a":
+        case "s":
+        case "d":
+            elementoDiv = div5;
+            break;
+        case "q":
+        case "w":
+        case "e":
+            creaDiv(letraPulsada)
+            break;
     }
-    else if (letraPulsada === 'd') {
-        colorFondo = 'lightblue';
-        elementoDiv = div5;
-    }
-    else if (letraPulsada === 'q') {
-        creaDiv(letraPulsada)
-        colorFondo = 'purple';
-    }
-    else if (letraPulsada === 'w') {
-        creaDiv(letraPulsada)
-        colorFondo = 'gray';
-    }
-    else if (letraPulsada === 'e') {
-        creaDiv(letraPulsada)
-        colorFondo = 'brown';
-    }
-    else {
-        colorFondo='white';
-        elementoDiv.style.color = 'black';
-    }
-
-    cambiaBackGround(elementoDiv, colorFondo,'letra');
-
+    cambiaBackGround(elementoDiv, asignaColor(letraPulsada),'letra');
+    //cambiaBackGround(elementoDiv, colorFondo,'letra');
 })
-    
-
-
